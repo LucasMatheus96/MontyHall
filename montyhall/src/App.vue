@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <h1>Problema de Monty Hall</h1>
-    <BoxGift></BoxGift>
+    <DoorDisplay number="1" :hasGift="false"></DoorDisplay>
   </div>
 </template>
 
 <script>
-import BoxGift from './components/BoxGift.vue'
+import DoorDisplay from './components/DoorDisplay.vue'
+  
 
 
 export default {
   name:'App',
-  components:{BoxGift}
+  components:{DoorDisplay}
 }
 </script>
 
