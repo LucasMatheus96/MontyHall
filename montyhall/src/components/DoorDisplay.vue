@@ -1,15 +1,15 @@
 <template>
     
-  <div class="door-area">
-    
+  <div class="door-area">    
     <div class="door-frame" :class="{selected: selected && !open}">
-        <BoxGift></BoxGift>
+        <BoxGift v-if="open && hasGift"></BoxGift>
     </div>
-    <div class="door" @click="selected = !selected">
-        <div class="number" :class="{selected}">{{ number }}</div>
-        <div class="knob" :class="{selected}"
-         @click="open = true"></div>
-    </div>
+   <div class="door" :class="{ open }"
+            @click="selected = !selected">
+            <div class="number" :class="{ selected }">{{ number }}</div>
+            <div class="knob" :class="{ selected }"
+                @click.stop="open = true"></div>
+   </div>
   </div>
 </template>
 
@@ -21,12 +21,12 @@ export default {
  commponets: {BoxGift},
  props:{
     number:{},
-    hasGift:{type:Boolean}
+    hasGift:{ type: Boolean }
  },
  data: function(){
     return {
-        open:false,
-        selected: false
+       open: false,
+            selected: false
     }
  }
 
@@ -45,7 +45,8 @@ export default {
   height:310px;
   border-bottom: 10px solid #AAA;
   margin-bottom:20px;
- font-size: 3em;
+  font-size: 3em;
+
   display: flex;
   justify-content: center;
 }
@@ -72,8 +73,8 @@ export default {
   background-color : chocolate;
   display: flex;
   flex-direction: column;
-  padding:20px;
   align-items: center;
+  padding:20px;
 }
 
 .door .knob{
@@ -91,24 +92,23 @@ export default {
   border-top: var(--selected-border);
 }
 
-.door .number.selected{
-  color:yellow;
+.door > .number.selected {
+    color: yellow;
 }
 
-.door > .knob.selected{
-  background-color: yellow;
+.door > .knob.selected {
+    background-color: yellow;
 }
-
 
 .door.open {
-  background-color : #0007
+    background-color: #0007;
 }
 
 .door.open .knob {
-  display: none;
+    display: none;
 }
 
 .door.open .number {
-  display: none;
+    display: none;
 }
 </style>
