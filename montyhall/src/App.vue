@@ -1,7 +1,30 @@
 <template>
   <div id="app">
     <h1>Problema de Monty Hall</h1>
-    <DoorDisplay number="1" :hasGift="false"></DoorDisplay>
+    <div class="form">
+      <div v-if="!started">
+        <label for="portsAmount">Quantidade de Portas: </label>
+        <input 
+              type="text" 
+              id="portsAmount" 
+              size ="3"
+              v-model.number="portsAmount"
+        >
+      </div>
+      <div v-if="!started">
+        <label for="selectedPort">Qual a porta é premiada ?</label>
+        <input type="text" id="selectedPort" size="3" v-model.number="selectedPort">
+      </div>
+    </div>
+    <button v-if="!started" @click="started= true">Iniciar</button>      
+    <button v-if="started" @click="started= false">Reiniciar</button>      
+  
+    <div class="doors" v-if="started">
+      <div vfor="i in portsAmount" :key="i">
+        <DoorDisplay :hasGift="i== selectedPort"  :number="i"></DoorDisplay>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -12,7 +35,14 @@ import DoorDisplay from './components/DoorDisplay.vue'
 
 export default {
   name:'App',
-  components:{DoorDisplay}
+  components:{DoorDisplay},
+  data: function (){
+    return{
+      started:false,
+      portsAmount:3,
+      selectedPort: null
+    }
+  }
 }
 </script>
 
